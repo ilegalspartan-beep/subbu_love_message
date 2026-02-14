@@ -41,6 +41,27 @@ border-radius:20px;
 background:#ff3366;
 color:white;
 cursor:pointer;
+font-size:16px;
+}
+
+#valentineText{
+font-size:28px;
+margin-top:20px;
+color:#ff4da6;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{ text-shadow:0 0 10px #ff0066; }
+to{ text-shadow:0 0 25px #ff66cc; }
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+z-index:1;
 }
 </style>
 </head>
@@ -53,28 +74,85 @@ cursor:pointer;
 <p>
 En aruyirea… enavaleaa… ❤️<br><br>
 
-Unna nerya love panren. Sometimes kovam varum,
+Unna nerya love panren. Sometimes kovam vara mari panni irupen,
 but adhu ellam small accident dhaan.<br><br>
 
 2016 la start aana namma story,
 ippo varaikum strong ah irukku.
-Fight pannom… sirichom… azhudhadhum irukku…
-aana oru naalum separate aagala.<br><br>
+sanda potom.. sirichom… azhudhadhum irukom…
+aana oru naalum vena nu nenachadhu illa anb pririnjum pogala.<br><br>
 
 Already en pondati dhaan nee…
 But officially world-ku kaata…
 Will you marry me forever? 💍❤️
 </p>
+<h2 id="valentineText">Will you be my Valentine? ❤️</h2>
 
+<button onclick="startFireworks()">YES 💖</button>
+<br>
 <button onclick="goBack()">⬅️ Back</button>
 
 </div>
-
+<canvas id="fireworks"></canvas>
+  
 <script>
 function goBack(){
 window.location.href="index.html";
 }
+  /* FIREWORKS SYSTEM */
+
+let canvas=document.getElementById("fireworks");
+let ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function startFireworks(){
+setInterval(()=>{
+let x=Math.random()*canvas.width;
+let y=Math.random()*canvas.height/2;
+
+for(let i=0;i<70;i++){
+particles.push({
+x:x,
+y:y,
+speedX:(Math.random()-0.5)*8,
+speedY:(Math.random()-0.5)*8,
+life:100,
+color:"hsl("+Math.random()*360+",100%,50%)"
+});
+}
+},900);
+
+animate();
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,i)=>{
+p.x+=p.speedX;
+p.y+=p.speedY;
+p.speedY+=0.05;
+p.life--;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fillStyle=p.color;
+ctx.fill();
+
+if(p.life<=0){
+particles.splice(i,1);
+}
+});
+
+requestAnimationFrame(animate);
+}
+
 </script>
 
 </body>
 </html>
+
