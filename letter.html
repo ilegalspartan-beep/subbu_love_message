@@ -88,14 +88,22 @@ Will you marry me forever? 💍❤️
 </p>
 <h2 id="valentineText">Will you be my Valentine? ❤️</h2>
 
-<button onclick="startFireworks()">YES 💖</button>
+<button onclick="celebrate()">YES 💖</button>
+
 <br>
 <button onclick="goBack()">⬅️ Back</button>
 
 </div>
 <canvas id="fireworks"></canvas>
   
+<img id="danceGif"
+src="https://designimages.appypie.com/aitools/text-animation/couple-dance.gif"
+style="display:none; position:fixed; bottom:20px; right:20px; width:180px; z-index:5;">
+  
 <script>
+function showDance(){
+document.getElementById("danceGif").style.display="block";
+}
 function goBack(){
 window.location.href="index.html";
 }
@@ -108,7 +116,10 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let particles=[];
-
+function celebrate(){
+startFireworks();
+showDance();
+}
 function startFireworks(){
 setInterval(()=>{
 let x=Math.random()*canvas.width;
@@ -155,4 +166,5 @@ requestAnimationFrame(animate);
 
 </body>
 </html>
+
 
