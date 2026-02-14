@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Letter ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Georgia,serif;
+background:linear-gradient(to bottom,#000000,#330033);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+padding:20px;
+}
+
+.letter{
+max-width:700px;
+background:rgba(255,255,255,0.1);
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 25px rgba(255,0,100,0.6);
+animation:fade 2s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(30px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#ff3366;
+color:white;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="letter">
+<h1>💌 To My Pondati Uma ❤️</h1>
+
+<p>
+En aruyirea… enavaleaa… ❤️<br><br>
+
+Unna nerya love panren. Sometimes kovam varum,
+but adhu ellam small accident dhaan.<br><br>
+
+2016 la start aana namma story,
+ippo varaikum strong ah irukku.
+Fight pannom… sirichom… azhudhadhum irukku…
+aana oru naalum separate aagala.<br><br>
+
+Already en pondati dhaan nee…
+But officially world-ku kaata…
+Will you marry me forever? 💍❤️
+</p>
+
+<button onclick="goBack()">⬅️ Back</button>
+
+</div>
+
+<script>
+function goBack(){
+window.location.href="index.html";
+}
+</script>
+
+</body>
+</html>

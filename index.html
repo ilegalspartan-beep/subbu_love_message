@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma ❤️ Subramani</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(to bottom,#000000,#1a001a);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+.hidden{display:none;}
+
+.container{
+padding:20px;
+max-width:900px;
+margin:auto;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:#ff3366;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin:10px;
+}
+
+input{
+padding:10px;
+border-radius:20px;
+border:none;
+text-align:center;
+}
+
+#slideshow img{
+width:100%;
+max-width:400px;
+border-radius:20px;
+margin-top:15px;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+}
+
+.rose{
+position:fixed;
+top:-20px;
+font-size:20px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{transform:translateY(100vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="passwordScreen" class="container">
+<h1>🔐 Only For Uma 💖</h1>
+<input type="password" id="password" placeholder="Enter Password">
+<br>
+<button onclick="checkPassword()">Enter</button>
+</div>
+
+<!-- MAIN -->
+<div id="mainContent" class="hidden container">
+
+<h1>Uma ❤️ Subramani</h1>
+
+<h2 id="daysCount"></h2>
+
+<div id="slideshow">
+<img id="slideImg" src="images/photo1.jpg">
+</div>
+
+<br>
+
+<button onclick="startLove()">YES 💖</button>
+<button id="noBtn" onmouseover="moveNo()">NO 😜</button>
+<button onclick="goToLetter()">NEXT ➡️</button>
+
+</div>
+
+<audio id="bgMusic" src="music/love.mp3"></audio>
+<canvas id="fireworks"></canvas>
+
+<script>
+
+function checkPassword(){
+if(document.getElementById("password").value==="18102016"){
+document.getElementById("passwordScreen").classList.add("hidden");
+document.getElementById("mainContent").classList.remove("hidden");
+startSlideshow();
+calculateDays();
+}
+else{
+alert("Wrong password 😭");
+}
+}
+
+function calculateDays(){
+let start=new Date("2016-10-18");
+let today=new Date();
+let diff=Math.floor((today-start)/(1000*60*60*24));
+document.getElementById("daysCount").innerText=diff+" Days Together ❤️";
+}
+
+let slides=[
+"images/photo1.jpg",
+"images/photo2.jpg",
+"images/photo3.jpg",
+"images/photo4.jpg"
+];
+
+let current=0;
+
+function startSlideshow(){
+setInterval(()=>{
+current++;
+if(current>=slides.length){current=0;}
+document.getElementById("slideImg").src=slides[current];
+},3000);
+}
+
+function startLove(){
+document.getElementById("bgMusic").play();
+startRoses();
+startFireworks();
+}
+
+function moveNo(){
+let btn=document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.left=Math.random()*80+"vw";
+btn.style.top=Math.random()*80+"vh";
+}
+
+function goToLetter(){
+window.location.href="letter.html";
+}
+
+function startRoses(){
+setInterval(()=>{
+let rose=document.createElement("div");
+rose.classList.add("rose");
+rose.innerHTML="🌹";
+rose.style.left=Math.random()*100+"vw";
+rose.style.animationDuration=3+Math.random()*5+"s";
+document.body.appendChild(rose);
+setTimeout(()=>rose.remove(),8000);
+},400);
+}
+
+/* FIREWORKS */
+let canvas=document.getElementById("fireworks");
+let ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function startFireworks(){
+setInterval(()=>{
+let x=Math.random()*canvas.width;
+let y=Math.random()*canvas.height/2;
+for(let i=0;i<60;i++){
+particles.push({
+x:x,
+y:y,
+speedX:(Math.random()-0.5)*6,
+speedY:(Math.random()-0.5)*6,
+life:100,
+color:"hsl("+Math.random()*360+",100%,50%)"
+});
+}
+},900);
+animate();
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach((p,i)=>{
+p.x+=p.speedX;
+p.y+=p.speedY;
+p.speedY+=0.05;
+p.life--;
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fillStyle=p.color;
+ctx.fill();
+if(p.life<=0){particles.splice(i,1);}
+});
+requestAnimationFrame(animate);
+}
+
+</script>
+</body>
+</html>
