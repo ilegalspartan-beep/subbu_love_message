@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +100,11 @@ Will you marry me forever? 💍❤️
 <img id="danceGif"
 src="https://designimages.appypie.com/aitools/text-animation/couple-dance.gif"
 style="display:none; position:fixed; bottom:20px; right:20px; width:180px; z-index:5;">
-  
+ 
+<audio id="bgMusic" loop>
+  <source src="https://files.catbox.moe/v8far8.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 function showDance(){
 document.getElementById("danceGif").style.display="block";
@@ -117,8 +122,14 @@ canvas.height=window.innerHeight;
 
 let particles=[];
 function celebrate(){
-startFireworks();
-showDance();
+    startFireworks();
+    showDance();
+
+    let music = document.getElementById("bgMusic");
+    music.volume = 0.7; // optional romantic volume
+    music.play().catch(function(error){
+        console.log("Audio blocked:", error);
+    });
 }
 function startFireworks(){
 setInterval(()=>{
